@@ -1,42 +1,30 @@
-import React from "react"
-import { Create } from "./Create"
-import { HideColumns } from "./HideColumns"
 import { InputSearch } from "./InputSearch"
+import { HideColumns } from "./HideColumns"
 
 type headingProps = {
-    labelCreate: string,
     table: any,
     valueGetColumns: string,
-    plachoderForSearch: string,
-    modalBodyFooter: any
-    modalBodyComponents: any
+    placeholderForSearch: string, // corrected typo
+    children: React.ReactNode, // corrected typo
 }
 
 export const Heading: React.FC<headingProps> = ({
-    labelCreate,
     table,
     valueGetColumns,
-    plachoderForSearch,
-    modalBodyFooter,
-    modalBodyComponents
+    placeholderForSearch, // corrected typo
+    children, // corrected typo
 }) => {
     return (
-        <>
-            <div className="flex justify-between px-4">
-                <InputSearch
-                    table={table}
-                    valueGetColumns={valueGetColumns}
-                    placeholder={plachoderForSearch}
-                />
-                <div className="space-x-3">
-                    <HideColumns table={table} />
-                    {/* <Create
-                        label={labelCreate}
-                        modalBodyComponens={modalBodyComponents}
-                        modalBodyFooter={modalBodyFooter}
-                    /> */}
-                </div>
+        <div className="flex justify-between px-4">
+            <InputSearch
+                table={table}
+                valueGetColumns={valueGetColumns}
+                placeholder={placeholderForSearch} // corrected typo
+            />
+            <div className="space-x-3">
+                <HideColumns table={table} />
+                {children}
             </div>
-        </>
+        </div>
     )
 }

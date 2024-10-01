@@ -8,18 +8,18 @@ const registerSchema = z.object({
     name: z.string().min(1, "Name is required"),
     email: z.string().email("Invalid email format"),
     password: z.string().min(8, "Password must be at least 8 characters"),
-    confirmPassword: z.string(),
-}).refine((data) => data.password === data.confirmPassword, {
+    password_confirmation: z.string(),
+}).refine((data) => data.password === data.password_confirmation, {
     message: "Passwords do not match",
-    path: ["confirmPassword"],
+    path: ["password_confirmation"],
 });
 
 export const Register: FC = () => {
-    const { login } = useAuth(); // Jika Anda punya fungsi register di useAuth, ganti ini dengan register
+    const { register } = useAuth(); // Jika Anda punya fungsi register di useAuth, ganti ini dengan register
     const [name, setName] = useState<string>(''); 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [confirmPassword, setConfirmPassword] = useState<string>(''); 
+    const [password_confirmation, setpassword_confirmation] = useState<string>(''); 
     const [errors, setErrors] = useState<{ [key: string]: string }>({}); // Menyimpan pesan error
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,8 +34,8 @@ export const Register: FC = () => {
         setPassword(e.target.value);
     };
 
-    const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setConfirmPassword(e.target.value);
+    const handlepassword_confirmationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setpassword_confirmation(e.target.value);
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -43,11 +43,11 @@ export const Register: FC = () => {
 
         // Validasi data menggunakan Zod
         try {
-            const formData = { name, email, password, confirmPassword };
+            const formData = { name, email, password, password_confirmation };
             registerSchema.parse(formData); // Jika validasi berhasil, tidak akan ada error
 
             // Jika validasi berhasil, panggil fungsi register (atau login dalam contoh ini)
-            await login(email, password);
+            await register(name, email, password, password_confirmation);
         } catch (validationError: any) {
             // Simpan error di state jika validasi gagal
             const zodErrors = validationError.errors.reduce((acc: any, error: any) => {
@@ -120,18 +120,18 @@ export const Register: FC = () => {
 
                             {/* Confirm Password Field */}
                             <div>
-                                <label htmlFor="confirmPassword" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
+                                <label htmlFor="password_confirmation" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
                                 <input
                                     type="password"
-                                    name="confirmPassword"
-                                    id="confirmPassword"
+                                    name="password_confirmation"
+                                    id="password_confirmation"
                                     placeholder="••••••••"
-                                    className={`bg-gray-50 border ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'} text-gray-900 rounded-lg block w-full p-2.5 focus:border-primary focus:ring-primary focus:outline-none`}
+                                    className={`bg-gray-50 border ${errors.password_confirmation ? 'border-red-500' : 'border-gray-300'} text-gray-900 rounded-lg block w-full p-2.5 focus:border-primary focus:ring-primary focus:outline-none`}
                                     required
-                                    value={confirmPassword}
-                                    onChange={handleConfirmPasswordChange}
+                                    value={password_confirmation}
+                                    onChange={handlepassword_confirmationChange}
                                 />
-                                {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>}
+                                {errors.password_confirmation && <p className="text-red-500 text-xs mt-1">{errors.password_confirmation}</p>}
                             </div>
 
                             {/* Submit Button */}

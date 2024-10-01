@@ -5,6 +5,7 @@ const API_URL = 'http://localhost:8000/api';
 
 export const authService = {
     login,
+    register,
     logout,
     getCurrentUser,
 };
@@ -18,6 +19,10 @@ async function login(email: string, password: string) {
     }
 
     return response.data;
+}
+
+async function register(name: string, email: string, password: string, password_confirmation: string) {
+    const response = await axios.post(`${API_URL}/register`, { name, email, password, password_confirmation })
 }
 
 async function logout() {

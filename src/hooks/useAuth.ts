@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { authService } from "@/services/authServices";
+import { getToken } from "@/services/cookie";
 
 type AuthContextType = {
     user: User | null;
     login: (email: string, password: string) => Promise<void>;
+    register: (name: string, email: string, password: string, password_confirmation: string) => Promise<void>;
     logout: () => void;
     isAuthenticated: boolean;
     isLoading: boolean;
@@ -23,9 +25,12 @@ export const useAuth = (): AuthContextType => {
 
     useEffect(() => {
         const fetchUser = async () => {
-            const currentUser = await authService.getCurrentUser();
-            if (currentUser) {
-                setUser(currentUser);
+            const token = getToken(); // Ambil token dari cookie
+            if (token) {
+                const currentUser = await authService.getCurrentUser();
+                if (currentUser) {
+                    setUser(currentUser);
+                }
             }
             setIsLoading(false);
         };
@@ -45,6 +50,14 @@ export const useAuth = (): AuthContextType => {
         }
     };
 
+    const register = async (name: string, email: string, password: string, password_confirmation: string) => {
+        try {
+            await authService.register(name, email, password, password_confirmation);
+        } catch (error) {
+            console.error("Failed to register", error);
+        }
+    };
+
     const logout = async () => {
         try {
             await authService.logout();
@@ -58,8 +71,9 @@ export const useAuth = (): AuthContextType => {
     return {
         user,
         login,
+        register,
         logout,
-        isAuthenticated: user !== null,
+        isAuthenticated: undefined !== null, // Cek apakah token ada, bukan hanya user
         isLoading,
     };
 };

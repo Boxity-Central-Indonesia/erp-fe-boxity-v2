@@ -1,12 +1,7 @@
 import apiClient from './apiClient'; // Pastikan untuk mengimpor apiClient, bukan axios
 
-// Tipe untuk objek User individu
-export type User = {
-    id: string;
-    name: string;
-    username: string;
-    email: string;
-};
+import { userForm } from '@/pages/users/type/userType';
+
 
 // Tipe untuk respons API yang mengandung status dan data pengguna
 export type ApiResponse<T> = {
@@ -15,31 +10,53 @@ export type ApiResponse<T> = {
 };
 
 // Fungsi untuk mengambil daftar pengguna
-export const getUsers = async (): Promise<User[]> => {
-    const response = await apiClient.get<ApiResponse<User[]>>('/users');
+export const getUsers = async (): Promise<userForm[]> => {
+    const response = await apiClient.get<ApiResponse<userForm[]>>('/users');
 
-    if(response.status === 200) {
+    if (response.status === 200) {
         return response.data.data;
     }
 
-    throw new Error('Failed to fetch users'); 
+    throw new Error('Failed to fetch users');
 };
 
-
-
 // Fungsi untuk menambah pengguna baru
-// export const createUser = async (user: Partial<User>): Promise<User> => {
-//     const response = await axios.post<User>('https://api.example.com/users', user);
-//     return response.data;
-// };
+export const createUser = async (user: Partial<userForm>): Promise<userForm> => {
+    const { name, email, username, gender, no_handphone, password, password_confirmation } = user;
 
-// // Fungsi untuk mengedit data pengguna
+    const response = await apiClient.post<ApiResponse<userForm>>('/users', {
+        name,
+        email,
+        username,
+        gender,
+        no_handphone,
+        password,
+        password_confirmation,
+    });
+
+    if (response.status === 201) {
+        return response.data.data;
+    }
+
+    throw new Error('Failed to create user');
+};
+
+// Fungsi untuk mengedit data pengguna
 // export const updateUser = async (id: string, user: Partial<User>): Promise<User> => {
-//     const response = await axios.put<User>(`https://api.example.com/users/${id}`, user);
-//     return response.data;
+//     const response = await apiClient.put<ApiResponse<User>>(`/users/${id}`, user);
+
+//     if (response.status === 200) {
+//         return response.data.data;
+//     }
+
+//     throw new Error('Failed to update user');
 // };
 
 // // Fungsi untuk menghapus pengguna
 // export const deleteUser = async (id: string): Promise<void> => {
-//     await axios.delete(`https://api.example.com/users/${id}`);
+//     const response = await apiClient.delete<ApiResponse<null>>(`/users/${id}`);
+
+//     if (response.status !== 204) {
+//         throw new Error('Failed to delete user');
+//     }
 // };

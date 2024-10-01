@@ -8,6 +8,7 @@ import { UnprotectedRoute } from './components/commons/UnProtectedRoute';
 import { AuthLayouts } from './layouts/AuthLayout';
 import { MainLayouts } from './layouts/MainLayouts';
 import { Users } from './pages/users/Users';
+import { Company } from './pages/companies/Company';
 
 export const AppRoutes: React.FC = () => {
     return (
@@ -40,6 +41,16 @@ export const AppRoutes: React.FC = () => {
                     <ProtectedRoute>
                         <MainLayouts>
                             <Users />
+                        </MainLayouts>
+                    </ProtectedRoute>
+                }
+            />
+             <Route
+                path="/companies"
+                element={
+                    <ProtectedRoute>
+                        <MainLayouts>
+                            <Company />
                         </MainLayouts>
                     </ProtectedRoute>
                 }

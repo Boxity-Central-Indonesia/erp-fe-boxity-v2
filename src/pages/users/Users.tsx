@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { TableComponents } from "@/components/commons/table/Table";
-import { getUsers, User } from "@/services/userServices";
-import { columns } from "./columns";
+import { getUsers } from "@/services/userServices";
 import { SkeletonTable } from "@/components/commons/skeleton/SkeletonTable";
 import { SkeletonText } from "@/components/commons/skeleton/SkeletonText";
+import { TableUser } from "./Table";
+import { userForm } from "./type/userType";
 
 export const Users = () => {
     // State untuk menyimpan data pengguna
-    const [data, setData] = useState<User[]>([]);
+    const [data, setData] = useState<userForm[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
@@ -40,10 +40,7 @@ export const Users = () => {
                     <p className="text-2xl font-semibold">Daftar pengguna</p>
                     <p className="max-w-[90%]">Daftar pengguna adalah cara untuk mengatur dan mengelola kelompok pengguna pada sebuah situs web atau platform. Ini membantu Anda menyasar pesan-pesan tertentu, personalisasi pengalaman, menyederhanakan tugas-tugas manajemen, dan memperoleh wawasan yang lebih baik tentang bagaimana perilaku segmen pengguna yang berbeda. Di bagian daftar pengguna, Anda biasanya dapat membuat daftar baru, melihat yang sudah ada, menambahkan atau menghapus pengguna, dan mengedit detail daftar.</p>
                 </div>
-                <TableComponents
-                    data={data}
-                    columns={columns}
-                />
+               <TableUser data={data}/>
             </section>
         </>
     );

@@ -9,7 +9,9 @@ export const ModalFooter: React.FC<ModalFooterProops> = ({ children }) => {
     return (
         <>
             <DialogFooter>
-                {children}
+                <div className="mt-4">
+                    {children}
+                </div>
             </DialogFooter>
         </>
     )

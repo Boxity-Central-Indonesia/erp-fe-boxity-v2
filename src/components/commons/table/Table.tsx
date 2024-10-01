@@ -29,18 +29,14 @@ type tableProps = {
     data: any,
     columns: any,
     labelCreate: string,
-    modalComponents: any,
-    modalBodyComponents: any,
-    modalBodyFooter: any,
+    componentsHeading: any,
 }
 
 
-export const TableComponents: React.FC<tableProps> = ({ 
-    data, 
-    columns, 
-    labelCreate,
-    modalBodyComponents,
-    modalBodyFooter
+export const TableComponents: React.FC<tableProps> = ({
+    data,
+    columns,
+    componentsHeading
 }) => {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -73,12 +69,12 @@ export const TableComponents: React.FC<tableProps> = ({
         <div className="w-full bg-white py-4 rounded-md shadow-md">
             <Heading
                 table={table}
-                labelCreate={labelCreate}
                 valueGetColumns="email"
-                plachoderForSearch="Filter Emails...."
-                modalBodyComponents={modalBodyComponents}
-                modalBodyFooter={modalBodyFooter}
-            />
+                placeholderForSearch="Filter Emails...."
+            >
+                {componentsHeading}
+            </Heading>
+
             <div className="rounded-md">
                 <Table>
                     <TableHeader>
