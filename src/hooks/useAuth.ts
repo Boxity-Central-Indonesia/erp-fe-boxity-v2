@@ -73,7 +73,7 @@ export const useAuth = (): AuthContextType => {
         login,
         register,
         logout,
-        isAuthenticated: undefined !== null, // Cek apakah token ada, bukan hanya user
+        isAuthenticated: getToken() != null, // Cek apakah token ada, bukan hanya user
         isLoading,
     };
 };

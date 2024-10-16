@@ -1,24 +1,24 @@
-import { FormsUser } from "../forms/Forms"
-import { useState } from "react"
-import { FooterCompany } from "../forms/Footer"
-import { objectErrors } from "../type/userType"
-import { BtnCreate } from "./BtnCreate"
 import { Modal } from "@/components/commons/modal/Modal"
+import { IconEdit } from "./IconEdit"
+import { FormsUser } from "../forms/Forms"
+import React, { useState } from "react"
+import { objectErrors } from "../type/userType"
+import { FooterCompany } from "../forms/Footer"
 
-type createProps = {
-    label: string
-    setRefresh: React.Dispatch<React.SetStateAction<boolean >>
+
+type editProps = {
+    id: string
+    setRefresh: React.Dispatch<React.SetStateAction<boolean>>
     refresh: boolean
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const CreateUser: React.FC<createProps> = ({
-    label,
-    setRefresh,
+export const EditUsers: React.FC<editProps> = ({ 
+    id,
     refresh,
+    setRefresh,
     setLoading
 }) => {
-
     const [name, setName] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [username, setUserName] = useState<string>('')
@@ -29,18 +29,27 @@ export const CreateUser: React.FC<createProps> = ({
     const [errors, setErrors] = useState<objectErrors>({})
     const [openModal, setOpenModal] = useState<any>()
 
+
     return (
         <>
             <Modal
+                componetsTriger={<IconEdit
+                    id={id}
+                    setName={setName}
+                    setEmail={setEmail}
+                    setUsername={setUserName}
+                    setGender={setGender}
+                    setno_handphone={setno_handphone}
+                    setOpenModal={setOpenModal}
+                />}
                 open={openModal}
-                componetsTriger={<BtnCreate setOpenModal={setOpenModal}/>}
-                modalTitle={`Tambah ${label}`}
-                modalDescriptions="Tambah user baru"
+                modalTitle="Edit pengguna"
+                modalDescriptions="Edit pengguna yang dipilih"
                 width="max-w-2xl"
                 setOpenModal={setOpenModal}
                 setErrors={setErrors}
                 modalBodyComponents={
-                    <FormsUser 
+                    <FormsUser
                         setName={setName}
                         setEmail={setEmail}
                         setUsername={setUserName}
@@ -52,16 +61,16 @@ export const CreateUser: React.FC<createProps> = ({
                         name={name}
                         email={email}
                         username={username}
-                        no_handphone={no_handphone}
                         gender={gender}
+                        no_handphone={no_handphone}
                         password={password}
                         password_confirmation={password_confirmation}
                         setErrors={setErrors}
-                        edit={true}
+                        edit={false}
                     />
                 }
-                modalBodyFooter={<FooterCompany 
-                    id={''}
+                modalBodyFooter={<FooterCompany
+                    id={id}
                     name={name}
                     email={email}
                     username={username}
@@ -70,11 +79,11 @@ export const CreateUser: React.FC<createProps> = ({
                     password={password}
                     password_confirmation={password_confirmation}
                     setErrors={setErrors}
-                    labelBtn="Tambah user"
-                    edit={false}
+                    labelBtn="Simpan perubahan"
+                    edit={true}
                     setOpenModal={setOpenModal}
-                    setRefresh={setRefresh}
                     refresh={refresh}
+                    setRefresh={setRefresh}
                     setLoading={setLoading}
                 />}
             />

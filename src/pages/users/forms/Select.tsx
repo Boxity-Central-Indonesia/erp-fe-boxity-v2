@@ -10,20 +10,21 @@ import React from "react";
 
 type FormSelectCompanyProps = {
   setGender: React.Dispatch<React.SetStateAction<string>>;
+  gender: string;
 };
 
-export const FormSelectCompany: React.FC<FormSelectCompanyProps> = ({ setGender }) => {
+export const FormSelectCompany: React.FC<FormSelectCompanyProps> = ({ setGender, gender }) => {
   return (
-      <Select onValueChange={setGender}> {/* Menggunakan onValueChange untuk memperbarui state */}
-          <SelectTrigger className="w-full">
-              <SelectValue placeholder="Gender" /> {/* Anda bisa menampilkan gender terpilih di sini */}
-          </SelectTrigger>
-          <SelectContent>
-              <SelectGroup>
-                  <SelectItem value="male">Male</SelectItem>
-                  <SelectItem value="female">Female</SelectItem>
-              </SelectGroup>
-          </SelectContent>
-      </Select>
+    <Select onValueChange={setGender} value={gender}> {/* Menggunakan value untuk menampilkan pilihan yang dipilih */}
+      <SelectTrigger className="w-full">
+        <SelectValue><p className="capitalize">{gender || "Gender"}</p></SelectValue>
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectItem value="male">Male</SelectItem>
+          <SelectItem value="female">Female</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
   );
 };

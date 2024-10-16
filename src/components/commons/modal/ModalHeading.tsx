@@ -1,5 +1,6 @@
-import { DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
-import React from "react"
+import React from "react";
+import * as Dialog from "@radix-ui/react-dialog";
+
 
 
 type ModalHeadingProps = {
@@ -7,19 +8,20 @@ type ModalHeadingProps = {
     modalDescriptions: string,
 }
 
-
-export const ModalHeading:React.FC<ModalHeadingProps> = ({
+export const ModalHeading: React.FC<ModalHeadingProps> = ({
     modalTitle,
     modalDescriptions
 }) => {
     return (
         <>
-            <DialogHeader className="border-b">
-                <DialogTitle className="">{modalTitle}</DialogTitle>
-                <DialogDescription className="pb-3">
+            <div className="border-b">
+                <Dialog.Title className="m-0 text-lg font-semibold text-mauve12">
+                    {modalTitle}
+                </Dialog.Title>
+                <Dialog.Description className="mb-5 text-[15px] leading-normal text-mauve11">
                     {modalDescriptions}
-                </DialogDescription>
-            </DialogHeader>
+                </Dialog.Description>
+            </div>
         </>
     )
 }

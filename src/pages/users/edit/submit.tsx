@@ -1,51 +1,43 @@
-import { formSchemaUser } from "../forms/formSchme";
-import { userPayload } from "../type/userType";
-import { createUser } from "@/services/userServices";
+import { formSchemaUserForEdit } from "../forms/formSchme";
+import { userPayloadForEdit } from "../type/userType";
+import { updateUser } from "@/services/userServices";
 
-export const submitCreate = async ({
+export const submitEdit = async ({
+    id, // Tambahkan id untuk mengupdate user yang spesifik
     name,
     email,
     username,
     no_handphone,
     gender,
-    password,
-    password_confirmation,
     setErrors,
     setOpenModal,
     setRefresh,
     refresh,
     setLoading
-}: userPayload, toast: any): Promise<void> => {
+}: userPayloadForEdit, toast: any): Promise<void> => {
 
+    
+    // Siapkan form data
     const formData = {
         name,
         email,
         username,
         no_handphone,
         gender,
-        password,
-        password_confirmation,
-        setOpenModal
     };
 
     try {
-        // Validasi form menggunakan Zod
-        formSchemaUser.parse(formData);
+        // Validasi data menggunakan Zod
+        formSchemaUserForEdit.parse(formData);
 
-        await createUser({
-            name,
-            email,
-            username,
-            no_handphone,
-            gender,
-            password,
-            password_confirmation
-        })
+        // Panggil updateUser dengan id dan formData
+        await updateUser(id, formData);
+
         setOpenModal(false)
         setRefresh(() => !refresh)
         toast({
-            title: "User berhasil dibuat"
-        });
+            title: "User berhasil diupdate"
+        })
         setLoading(false)
     } catch (validationError: any) {
         // Tangani error validasi dari Zod

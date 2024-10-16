@@ -98,7 +98,7 @@ export const Sidebar: React.FC = () => {
     };
 
     return (
-        <aside className="w-64 fixed top-0 left-0 z-40 border h-screen bg-white">
+        <aside className="w-64 fixed top-0 left-0 z-20 border h-screen bg-white">
             <div className="mt-20">
                 {menuSide.map((item, index) => (
                     <div key={index}>

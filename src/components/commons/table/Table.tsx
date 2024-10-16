@@ -28,7 +28,6 @@ import { Heading } from "./Heading"
 type tableProps = {
     data: any,
     columns: any,
-    labelCreate: string,
     componentsHeading: any,
 }
 
