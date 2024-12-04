@@ -1,6 +1,6 @@
 import { FormsUser } from "../forms/Forms"
 import { useState } from "react"
-import { FooterCompany } from "../forms/Footer"
+import { FooterUser } from "../forms/Footer"
 import { objectErrors } from "../type/userType"
 import { BtnCreate } from "./BtnCreate"
 import { Modal } from "@/components/commons/modal/Modal"
@@ -60,7 +60,7 @@ export const CreateUser: React.FC<createProps> = ({
                         edit={true}
                     />
                 }
-                modalBodyFooter={<FooterCompany 
+                modalBodyFooter={<FooterUser 
                     id={''}
                     name={name}
                     email={email}

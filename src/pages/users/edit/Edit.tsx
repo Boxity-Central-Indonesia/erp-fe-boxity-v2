@@ -3,7 +3,7 @@ import { IconEdit } from "./IconEdit"
 import { FormsUser } from "../forms/Forms"
 import React, { useState } from "react"
 import { objectErrors } from "../type/userType"
-import { FooterCompany } from "../forms/Footer"
+import { FooterUser } from "../forms/Footer"
 
 
 type editProps = {
@@ -69,7 +69,7 @@ export const EditUsers: React.FC<editProps> = ({
                         edit={false}
                     />
                 }
-                modalBodyFooter={<FooterCompany
+                modalBodyFooter={<FooterUser
                     id={id}
                     name={name}
                     email={email}

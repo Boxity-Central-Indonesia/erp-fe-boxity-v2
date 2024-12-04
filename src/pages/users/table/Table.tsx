@@ -34,7 +34,7 @@ export const TableUser:React.FC<TableUserProps> = ({
     data,
     setRefresh,
     refresh,
-    setLoading
+    setLoading,
 }) => {
 
     const columns = createColumns({ setRefresh, refresh, setLoading });
@@ -42,7 +42,10 @@ export const TableUser:React.FC<TableUserProps> = ({
 
     return(
         <>
-            <TableComponents columns={columns} data={data} componentsHeading={componentsHeading({setRefresh, refresh, setLoading})}/>
+            <TableComponents 
+                columns={columns} 
+                data={data} 
+                componentsHeading={componentsHeading({setRefresh, refresh, setLoading})}/>
         </>
     )
 }

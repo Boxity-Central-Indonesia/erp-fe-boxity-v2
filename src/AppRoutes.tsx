@@ -9,6 +9,7 @@ import { AuthLayouts } from './layouts/AuthLayout';
 import { MainLayouts } from './layouts/MainLayouts';
 import { Users } from './pages/users/Users';
 import { Company } from './pages/companies/Company';
+import { Transaction } from './pages/transactions/Transactions';
 
 export const AppRoutes: React.FC = () => {
     return (
@@ -51,6 +52,16 @@ export const AppRoutes: React.FC = () => {
                     <ProtectedRoute>
                         <MainLayouts>
                             <Company />
+                        </MainLayouts>
+                    </ProtectedRoute>
+                }
+            />
+             <Route
+                path="/transaction"
+                element={
+                    <ProtectedRoute>
+                        <MainLayouts>
+                            <Transaction />
                         </MainLayouts>
                     </ProtectedRoute>
                 }

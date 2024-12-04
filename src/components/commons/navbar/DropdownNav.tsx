@@ -27,7 +27,7 @@ export function DropdownNav() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar>
+        <Avatar role="button">
           <AvatarFallback>BR</AvatarFallback>
           <AvatarImage src="#" />
         </Avatar>
@@ -58,7 +58,7 @@ export function DropdownNav() {
             </span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => logout()}>
+        <DropdownMenuItem aria-label="log-out" onClick={() => logout()}>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
         </DropdownMenuItem>

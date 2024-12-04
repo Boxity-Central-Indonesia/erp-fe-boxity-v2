@@ -10,6 +10,8 @@
   ],
   "compilerOptions": {
     "baseUrl": ".",
+    "jsx": "react-jsx",  // atau "react" jika menggunakan React 17 ke bawah
+    "esModuleInterop": true,
     "paths": {
       "@/*": ["./src/*"]
     }

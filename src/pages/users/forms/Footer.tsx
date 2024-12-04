@@ -7,7 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 // import { Loading } from "@/components/commons/loading/Loading";
 // import { useState } from "react";
 
-export const FooterCompany: React.FC<userPayloadForFooter> = ({
+export const  FooterUser: React.FC<userPayloadForFooter> = ({
     id,
     name,
     email,
