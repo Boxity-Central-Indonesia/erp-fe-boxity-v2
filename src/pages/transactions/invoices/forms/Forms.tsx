@@ -10,15 +10,21 @@ import {
 } from "@/components/ui/select"
 import { SelectOrder } from "./SelectOrder"
 import { DatePicker } from "./DatePicker"
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import { getOrders } from "@/services/orderServices"
 
+
+interface OrderOption {
+    value: number;
+    label: string;
+}
+
 interface FormInvoicesProps {
-    dataOrder: any;
-    setDataOrder: any;
+    dataOrder: [];
+    setDataOrder: React.Dispatch<React.SetStateAction<OrderOption[]>>;
     date: Date | undefined; // Allow `date` to be `null`
     dueDate: Date | undefined; // Allow `dueDate` to be `null`
-    status: string;
+    status: string | undefined;
     setDate: (date: Date | undefined) => void; // Explicitly type `setDate` to accept `null`
     setDueDate: (date: Date | undefined) => void; // Explicitly type `setDueDate` to accept `null`
     setStatus: (status: string) => void;

@@ -10,6 +10,12 @@ interface CreatePaymentsProps {
     setLoading: any;
 }
 
+interface InvoiceOption {
+    value: number;
+    label: string;
+}
+
+
 export const CreatePayments: React.FC<CreatePaymentsProps> = ({
     setRefresh,
     refresh,
@@ -17,17 +23,17 @@ export const CreatePayments: React.FC<CreatePaymentsProps> = ({
 }) => {
 
     const [oepnModal, setOpenModal] = useState<boolean>(false)
-    const [dataInvoices, setDataInvices] = useState<[]>([])
-    const [selectDataInvoices, setSelectDataInvoices] = useState<string>('')
-    const [amount, setAmount] = useState<string>('')
-    const [paymentMethod, setPaymentMethod] = useState<string>('')
+    const [dataInvoices, setDataInvoices] = useState<InvoiceOption[]>([])
+    const [selectDataInvoices, setSelectDataInvoices] = useState<number | undefined>(undefined)
+    const [amount, setAmount] = useState<string | undefined>(undefined)
+    const [paymentMethod, setPaymentMethod] = useState<string | undefined>('')
     const [date, setDate] = useState<Date | undefined>(undefined)
-    const [errors, setErrors] = useState<object>({})
+    const [errors, setErrors] = useState<Record<string, string | undefined>>({})
 
     useEffect(() => {
-        setSelectDataInvoices('')
-        setAmount('')
-        setPaymentMethod('')
+        setSelectDataInvoices(undefined)
+        setAmount(undefined)
+        setPaymentMethod(undefined)
         setDate(undefined)
     }, [refresh])
 
@@ -47,7 +53,7 @@ export const CreatePayments: React.FC<CreatePaymentsProps> = ({
                         setAmount={setAmount}
                         amount={amount}
                         dataInvoices={dataInvoices}
-                        setDataInvoices={setDataInvices}
+                        setDataInvoices={setDataInvoices}
                         selectDataInvoices={selectDataInvoices}
                         paymentMethod={paymentMethod}
                         setSelectDataInvoices={setSelectDataInvoices}

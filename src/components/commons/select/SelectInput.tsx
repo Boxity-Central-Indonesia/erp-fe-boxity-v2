@@ -2,7 +2,7 @@ import Select, { SingleValue } from "react-select";
 import { Label } from "@/components/ui/label";
 
 interface SelectIputProps {
-    data: []
+    data: Option[]
     setSelectData: any
     placeHolder: string | null
     name: string | undefined
@@ -11,7 +11,7 @@ interface SelectIputProps {
 
 interface Option {
     label: string;
-    value: string;
+    value: number;
 }
 
 export const SelectInput: React.FC<SelectIputProps> = ({

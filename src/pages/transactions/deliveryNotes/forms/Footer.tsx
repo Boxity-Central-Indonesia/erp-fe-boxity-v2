@@ -5,7 +5,7 @@ import { SubmitCreate } from "../create/Submit"
 interface FooterDeliveyNotesProps {
     setOpenModal: any
     setErrors: any
-    noRef: string
+    noRef: string | undefined
     date: Date | undefined
     selectVendor: any
     selectWarehouse: any

@@ -12,6 +12,7 @@ interface CreateOrdersProps {
 }
 
 
+
 export const CreateOrders: React.FC<CreateOrdersProps> = ({
     setRefresh, 
     refresh,
@@ -19,21 +20,22 @@ export const CreateOrders: React.FC<CreateOrdersProps> = ({
 }) => {
 
     const [openModal, setOpenModal] = useState<any>()
-    const [dataOrder, setDataOrder] = useState<any>()
+    const [dataOrder, setDataOrder] = useState<[]>([])
     const [dataWarehouse, setDataWarehouse] = useState<any>(null)
-    const [dataReferensi, setDataReferensi] = useState<string>('')
-    const [dataOrderType, setDataOrderType] = useState<string>('')
-    const [dataSelectVendor, setDataSelectVendor] = useState<string>('')
-    const [dataSelectWarehouse, setDataSelectWarehouse] = useState<any>(null)
-    const [selectedOrderType, setSelectedOrderType] = useState("");
-    const [details, setDetails] = useState<string>("")
-    const [errors, setErrors] = useState<object>({})
+    const [dataReferensi, setDataReferensi] = useState<string | undefined>('')
+    const [dataOrderType, setDataOrderType] = useState<string | undefined>(undefined)
+    const [dataSelectVendor, setDataSelectVendor] = useState<string | undefined>(undefined)
+    const [dataSelectWarehouse, setDataSelectWarehouse] = useState<string | undefined>(undefined)
+    const [selectedOrderType, setSelectedOrderType] = useState<string | undefined>(undefined);
+    const [details, setDetails] = useState<string | undefined>(undefined)
+    const [errors, setErrors] = useState<Record<string, string | undefined>>({});
+
 
     useEffect(() => {
         setDataReferensi('')
-        setDataSelectVendor('')
-        setDataSelectWarehouse('')
-        setSelectedOrderType('')
+        setDataSelectVendor(undefined)
+        setDataSelectWarehouse(undefined)
+        setSelectedOrderType(undefined)
         setDetails('')
     }, [refresh])
 
@@ -58,8 +60,9 @@ export const CreateOrders: React.FC<CreateOrdersProps> = ({
                         selectedOrderType={selectedOrderType}
                         setDetails={setDetails}
                         errors={errors}
-                        setDataSelectVendor={setDataSelectVendor}
-                    />
+                        setDataSelectVendor={setDataSelectVendor} 
+                        dataOrderType={""} 
+                        dataReferensi={""}                    />
                 }
                 modalBodyFooter={
                     <FooterOrder

@@ -1,17 +1,18 @@
 import { Button } from "@/components/ui/button"
 import { submitCreate } from "../create/Submit"
+import React from "react"
 
 interface FooterOrderProps {
-    selectedOrderType: string
-    dataReferensi: string
-    dataSelectVendor: string
-    dataSelectWarehouse: string
-    details: string
-    setRefresh: any
-    refresh: any
-    setOpenModal: any
-    setErrors: any
-    setLoading: any
+    selectedOrderType: string | undefined
+    dataReferensi: string | undefined
+    dataSelectVendor: string | undefined
+    dataSelectWarehouse: string | undefined
+    details: string | undefined
+    setRefresh: React.Dispatch<React.SetStateAction<boolean>>
+    refresh: boolean
+    setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
+    setErrors: React.Dispatch<React.SetStateAction<{}>>
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const FooterOrder: React.FC<FooterOrderProps> = ({

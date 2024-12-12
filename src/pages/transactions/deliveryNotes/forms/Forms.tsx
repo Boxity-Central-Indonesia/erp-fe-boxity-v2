@@ -5,12 +5,17 @@ import { SelectInput } from "@/components/commons/select/SelectInput";
 import { Textarea } from "@/components/ui/textarea";
 import { TabelForDeliveryNotesItems } from "./TabelForDeliveryNotesItem";
 
+interface Option {
+    value: number;
+    label: string;
+}
+
 interface FormsDeliveryNotesProps {
     date: Date | undefined
     setDate: any
     setSelectVendor: any
-    dataVendor: []
-    dataWarehous: []
+    dataVendor: Option[]
+    dataWarehouse: Option[]
     setSelectWarehouse: any
     setNoref: any
     setDetails: any
@@ -24,7 +29,7 @@ export const FormsDeliveryNotes: React.FC<FormsDeliveryNotesProps> = ({
     setDate,
     setSelectVendor,
     dataVendor,
-    dataWarehous,
+    dataWarehouse,
     setSelectWarehouse,
     setNoref,
     setDetails,
@@ -64,7 +69,7 @@ export const FormsDeliveryNotes: React.FC<FormsDeliveryNotesProps> = ({
                     <Label htmlFor="status">Pilih warehouse</Label>
                     <div>
                         <SelectInput
-                            data={dataWarehous}
+                            data={dataWarehouse}
                             setSelectData={setSelectWarehouse}
                             name="warehouse_id"
                             placeHolder="Pilih warehouse" marginTop={null} />

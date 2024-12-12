@@ -17,12 +17,12 @@ export const CreateInvoices: React.FC<CreateInvoicesProps> = ({
     refresh,
 }) => {
     const [openModal, setOpenModal] = useState<boolean>(false);
-    const [dataOrder, setDataOrder] = useState<any>({});
+    const [dataOrder, setDataOrder] = useState<[]>([]);
     const [date, setDate] = React.useState<Date | undefined>(undefined); // Default to `null`
     const [dueDate, setDueDate] = useState<Date | undefined>(undefined); // Default to `null`
-    const [status, setStatus] = useState<string>("");
-    const [selectDataOrder, setSelectDataOrder] = useState<any>();
-    const [errors, setErrors] = useState<object>({})
+    const [status, setStatus] = useState<string | undefined>(undefined);
+    const [selectDataOrder, setSelectDataOrder] = useState<string | undefined>();
+    const [errors, setErrors] = useState<Record<string, string | undefined>>({})
 
     useEffect(() => {
         // Reset the state when `refresh` changes

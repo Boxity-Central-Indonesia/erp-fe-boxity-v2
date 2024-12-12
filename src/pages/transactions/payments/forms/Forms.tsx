@@ -2,7 +2,7 @@ import { SelectInvoices } from "./SelectInvoices"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { DatePicker } from "./DatePicker"
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import {
     Select,
     SelectContent,
@@ -15,20 +15,25 @@ import {
 
 import { getInvoices } from "@/services/invoicesServices"
 
+interface InvoiceOption {
+    value: number;
+    label: string;
+}
+
+
 interface FormPaymentsProps {
-    dataInvoices: []
-    selectDataInvoices: string
-    amount: string
-    paymentMethod: string
+    dataInvoices: InvoiceOption[]
+    selectDataInvoices: number | undefined
+    amount: string | undefined
+    paymentMethod: string | undefined
     date: Date | undefined
-    setDataInvoices: any
-    setSelectDataInvoices: any
+    setDataInvoices: React.Dispatch<React.SetStateAction<InvoiceOption[]>>
+    setSelectDataInvoices: React.Dispatch<React.SetStateAction<number | undefined>>
     setAmount: any
     setPaymentMethod: any
     setDate: any
     errors: any
 }
-
 export const FormPayments: React.FC<FormPaymentsProps> = ({
     dataInvoices,
     selectDataInvoices,
@@ -60,7 +65,8 @@ export const FormPayments: React.FC<FormPaymentsProps> = ({
         <>
             <div className="grid grid-cols-2 w-full items-center gap-3">
                 <div>
-                    <SelectInvoices dataInvoices={dataInvoices} setSelectDataInvoices={setSelectDataInvoices} />
+                    <SelectInvoices 
+                    dataInvoices={dataInvoices} setSelectDataInvoices={setSelectDataInvoices} />
                     {errors.invoice_id && <p className="text-red-600 text-sm mt-2">{errors.invoice_id}</p>}
                 </div>
                 <div>

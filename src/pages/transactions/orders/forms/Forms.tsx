@@ -3,26 +3,28 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea";
 import Select, { SingleValue } from "react-select";
 import { SetStateAction, useEffect, useState } from "react";
+import { Vendor } from "../../type/orderType";
 
 interface FormOrderProps {
-    dataOrder: any
-    dataWarehouse: any
-    setDataOrderType: any
-    setDataReferensi: any
+    dataOrder: Vendor[]
+    dataWarehouse: []
+    setDataOrderType: React.Dispatch<React.SetStateAction<string | undefined>>
+    setDataReferensi: React.Dispatch<React.SetStateAction<string | undefined>>
     dataOrderType: string
     dataReferensi: string
-    setDataSelectVendor: any
-    setDataSelectWarehouse: any
-    setSelectedOrderType: any
-    selectedOrderType: string
-    setDetails: any
-    errors: object
+    setDataSelectVendor: React.Dispatch<React.SetStateAction<string | undefined>>
+    setDataSelectWarehouse: React.Dispatch<React.SetStateAction<string | undefined>>
+    setSelectedOrderType: React.Dispatch<React.SetStateAction<string | undefined>>
+    selectedOrderType: string | undefined
+    setDetails: React.Dispatch<React.SetStateAction<string | undefined>>
+    errors: Record<string, string | undefined>
 }
 
 interface Option {
     label: string;
     value: string;
 }
+
 
 export const FormOrder: React.FC<FormOrderProps> = ({
     dataOrder,
@@ -54,25 +56,35 @@ export const FormOrder: React.FC<FormOrderProps> = ({
         }))
         setDataOrderOption(vendor)
         setDataWarehouseOption(warehouse)
+        console.log(dataOrder)
     }, [dataOrder])
 
 
     const handelChangeOrder = (option: SingleValue<Option>) => {
-        setDataSelectVendor(option?.value)
-        setSelectedOrderType(option?.value)
-        const newData = dataOrder.find((item: { id: string | undefined; }) => item.id === option?.value)
-        if (newData.transaction_type === 'supplier') {
-            setUseWarehouse(true)
-            return
+        setDataSelectVendor(option?.value);
+        setSelectedOrderType(option?.value);
+    
+        // Convert option?.value to a number if it's a string, and ensure proper comparison
+        const newData = dataOrder.find((item: Vendor) => item.id === Number(option?.value));
+    
+        // Check if newData exists and transaction_type is not undefined
+        if (newData && newData.transaction_type !== undefined) {
+            if (newData.transaction_type === 'supplier') {
+                setUseWarehouse(true);
+                return;
+            }
         }
-        setUseWarehouse(false)
-    }
+    
+        setUseWarehouse(false);
+    };
+    
+    
 
     const handleChangeWarehouse = (option: SingleValue<Option>) => {
         setDataSelectWarehouse(option?.value)
     }
 
-    const handleOrderTypeChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+    const handleOrderTypeChange = (event: { target: { value: SetStateAction<string | undefined>; }; }) => {
         setSelectedOrderType(event.target.value);
     };
 

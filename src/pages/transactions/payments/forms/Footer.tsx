@@ -5,14 +5,14 @@ import { SubmitCreate } from "../create/Submit"
 
 interface FooterPaymentsProps {
     date: Date | undefined
-    paymentMethod: string
-    amount: string
-    selectDataInvoices: string
-    setReferesh: any
-    setErrors: any
-    refresh: any
-    setOpenModal: any
-    setLoading: any
+    paymentMethod: string | undefined
+    amount: string | undefined
+    selectDataInvoices: number | undefined
+    setReferesh: React.Dispatch<React.SetStateAction<boolean>>
+    setErrors: React.Dispatch<React.SetStateAction<Record<string, string | undefined>>>
+    refresh: boolean
+    setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 

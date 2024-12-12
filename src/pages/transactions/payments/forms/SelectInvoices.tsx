@@ -1,14 +1,16 @@
+import React from "react";
 import Select, { SingleValue } from "react-select";
 import { Label } from "@/components/ui/label";
 
-interface SelectInvoiceProps {
-    dataInvoices: []
-    setSelectDataInvoices: any
+// Define the correct types for the options
+interface InvoiceOption {
+    value: number; // the value is of type number
+    label: string;
 }
 
-interface Option {
-    label: string;
-    value: string;
+interface SelectInvoiceProps {
+    dataInvoices: InvoiceOption[];
+    setSelectDataInvoices: React.Dispatch<React.SetStateAction<number | undefined>>; // Set state type for number or undefined
 }
 
 export const SelectInvoices: React.FC<SelectInvoiceProps> = ({
@@ -16,8 +18,9 @@ export const SelectInvoices: React.FC<SelectInvoiceProps> = ({
     setSelectDataInvoices
 }) => {
 
-    const handleChangeInvoices = (option: SingleValue<Option>) => {
-        setSelectDataInvoices(option?.value)
+    // Define the handleChangeInvoices to match the type of dataInvoices
+    const handleChangeInvoices = (option: SingleValue<InvoiceOption>) => {
+        setSelectDataInvoices(option?.value); // Set the selected invoice value (which is a number)
     }
 
     return (
@@ -34,5 +37,5 @@ export const SelectInvoices: React.FC<SelectInvoiceProps> = ({
                 />
             </div>
         </>
-    )
-}
+    );
+};
